@@ -13,7 +13,9 @@ RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7; \
 #
 # Install required packages
 #
-    yum -y --setopt=tsflags=nodocs install epel-release;
+# Add EPEL official repositories for required dependencies
+#
+    yum install -y --setopt=tsflags=nodocs https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm;
 
 RUN (cd /lib/systemd/system/sysinit.target.wants/; \
     for i in *; \
