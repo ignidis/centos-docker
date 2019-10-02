@@ -13,10 +13,11 @@ RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7; \
 #
 # Install required packages
 #
-# Add EPEL official repositories for required dependencies
-#
-    yum install -y --setopt=tsflags=nodocs https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm;
+    yum -y --setopt=tsflags=nodocs install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm rsync;
 
+#
+# Fix systemd for container
+#
 RUN (cd /lib/systemd/system/sysinit.target.wants/; \
     for i in *; \
         do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
